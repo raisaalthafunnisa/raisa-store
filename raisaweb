@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f0f4;
+            color: #333;
+        }
+        header {
+            background-color: #ffcccb;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #ff6f61;
+        }
+        .cart {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ff6f61;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+        .product {
+            border: 1px solid #ff6f61;
+            border-radius: 5px;
+            margin: 20px;
+            padding: 10px;
+            text-align: center;
+            background-color: #ffe5d9;
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My E-commerce Store</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <div class="product">
+            <h2>Product Name</h2>
+            <p>Product Description</p>
+            <p>Price: $10.00</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="cart">
+            <h3>Shopping Cart</h3>
+            <p>Your shopping cart is empty.</p>
+            <button onclick="checkout()">Checkout via WhatsApp</button>
+        </div>
+    </main>
+    <script>
+        function checkout() {
+            const phoneNumber = '123456789'; // Your WhatsApp number
+            const message = 'I would like to checkout my cart.';
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`);
+        }
+    </script>
+</body>
+</html>
