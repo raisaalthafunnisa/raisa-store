@@ -12,7 +12,6 @@
     --bg: #fff6f8;
 }
 
-/* Background motif */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -106,7 +105,7 @@ button {
 <body>
 
 <header>
-    <h1>✨ raisastore ✨</h1>
+<h1>✨ raisastore ✨</h1>
 </header>
 
 <div class="cart">
@@ -120,7 +119,7 @@ Total: Rp <span id="totalHarga">0</span>
 <div class="grid">
 
 <div class="card">
-<img src="https://via.placeholder.com/300x300">
+<img src="https://via.placeholder.com/300">
 <div class="card-body">
 <div>Baju Uniqlo</div>
 <div class="harga">Rp 50000</div>
@@ -129,11 +128,38 @@ Total: Rp <span id="totalHarga">0</span>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/300x300">
+<img src="https://via.placeholder.com/300">
 <div class="card-body">
 <div>Baju Adidas</div>
 <div class="harga">Rp 75000</div>
 <button onclick="beli('Baju Adidas',75000)">Beli</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<div class="card-body">
+<div>Baju Hoodie Vintage</div>
+<div class="harga">Rp 65000</div>
+<button onclick="beli('Baju Hoodie Vintage',65000)">Beli</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<div class="card-body">
+<div>Baju Oversize Korea</div>
+<div class="harga">Rp 60000</div>
+<button onclick="beli('Baju Oversize Korea',60000)">Beli</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<div class="card-body">
+<div>Baju Sweater Casual</div>
+<div class="harga">Rp 70000</div>
+<button onclick="beli('Baju Sweater Casual',70000)">Beli</button>
 </div>
 </div>
 
@@ -157,6 +183,7 @@ alert("Produk ditambahkan!");
 }
 
 function updateTampilan(){
+
 document.getElementById("cartCount").innerText = cart.length;
 
 let total = 0;
@@ -182,7 +209,7 @@ total += item.harga;
 
 pesan += "%0ATotal: Rp "+total;
 
-let nomorWA = "6281913820010";
+let nomorWA = "6281319930737";
 
 let url = "https://wa.me/"+nomorWA+"?text="+pesan;
 
