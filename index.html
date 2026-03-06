@@ -1,82 +1,195 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f0f4;
-            color: #333;
-        }
-        header {
-            background-color: #ffcccb;
-            padding: 20px;
-            text-align: center;
-        }
-        nav {
-            margin: 20px auto;
-            max-width: 600px;
-        }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #ff6f61;
-        }
-        .cart {
-            margin: 20px;
-            padding: 10px;
-            border: 1px solid #ff6f61;
-            border-radius: 5px;
-            background-color: #ffffff;
-        }
-        .product {
-            border: 1px solid #ff6f61;
-            border-radius: 5px;
-            margin: 20px;
-            padding: 10px;
-            text-align: center;
-            background-color: #ffe5d9;
-        }
-        button {
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>raisastore</title>
+
+<style>
+:root {
+    --pink: #ffc6d9;
+    --orange: #ffd8b5;
+    --bg: #fff6f8;
+}
+
+/* Background motif */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg);
+    background-image: radial-gradient(#ffd8b5 1px, transparent 1px),
+                      radial-gradient(#ffc6d9 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+}
+
+header {
+    background: linear-gradient(90deg,var(--pink),var(--orange));
+    color: #444;
+    padding: 20px;
+    text-align: center;
+}
+
+.cart {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    background: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.total {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.checkout {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(90deg,var(--pink),var(--orange));
+    color: #444;
+    padding: 12px 18px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 10px;
+}
+
+.harga {
+    color: #ff7fa5;
+    font-weight: bold;
+}
+
+button {
+    background: linear-gradient(90deg,var(--pink),var(--orange));
+    color: #444;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>My E-commerce Store</h1>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Shop</a>
-            <a href="#">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <div class="product">
-            <h2>Product Name</h2>
-            <p>Product Description</p>
-            <p>Price: $10.00</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="cart">
-            <h3>Shopping Cart</h3>
-            <p>Your shopping cart is empty.</p>
-            <button onclick="checkout()">Checkout via WhatsApp</button>
-        </div>
-    </main>
-    <script>
-        function checkout() {
-            const phoneNumber = '123456789'; // Your WhatsApp number
-            const message = 'I would like to checkout my cart.';
-            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`);
-        }
-    </script>
+
+<header>
+    <h1>✨ raisastore ✨</h1>
+</header>
+
+<div class="cart">
+🛒 <span id="cartCount">0</span>
+</div>
+
+<div class="total">
+Total: Rp <span id="totalHarga">0</span>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://via.placeholder.com/300x300">
+<div class="card-body">
+<div>Baju Uniqlo</div>
+<div class="harga">Rp 50000</div>
+<button onclick="beli('Baju Uniqlo',50000)">Beli</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/300x300">
+<div class="card-body">
+<div>Baju Adidas</div>
+<div class="harga">Rp 75000</div>
+<button onclick="beli('Baju Adidas',75000)">Beli</button>
+</div>
+</div>
+
+</div>
+
+<div class="checkout" onclick="checkoutWA()">
+Checkout via WhatsApp
+</div>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+updateTampilan();
+
+function beli(nama, harga){
+cart.push({nama, harga});
+localStorage.setItem("cart", JSON.stringify(cart));
+updateTampilan();
+alert("Produk ditambahkan!");
+}
+
+function updateTampilan(){
+document.getElementById("cartCount").innerText = cart.length;
+
+let total = 0;
+cart.forEach(item => total += item.harga);
+
+document.getElementById("totalHarga").innerText = total;
+}
+
+function checkoutWA(){
+
+if(cart.length === 0){
+alert("Keranjang kosong!");
+return;
+}
+
+let pesan = "Halo, saya mau pesan:%0A";
+let total = 0;
+
+cart.forEach((item, index)=>{
+pesan += (index+1)+". "+item.nama+" - Rp "+item.harga+"%0A";
+total += item.harga;
+});
+
+pesan += "%0ATotal: Rp "+total;
+
+let nomorWA = "6281913820010";
+
+let url = "https://wa.me/"+nomorWA+"?text="+pesan;
+
+window.open(url,"_blank");
+}
+
+</script>
+
 </body>
 </html>
